@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
-VIDEO_ROOT := $(KERNEL_SRC)/$(M)
+VIDEO_ROOT ?= $(PWD)
 KBUILD_OPTIONS += VIDEO_ROOT=$(VIDEO_ROOT)
 KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS=$(M)/../mmrm-driver/Module.symvers
 

@@ -41,12 +41,13 @@ emac_dwc_eqos-y += DWC_ETH_QOS_dev.o \
 emac_dwc_eqos-$(CONFIG_PTPSUPPORT_OBJ) += DWC_ETH_QOS_ptp.o
 
 KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
+M ?= $(PWD)
 
 all:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules $(KBUILD_OPTIONS)
+	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules $(KBUILD_OPTIONS)
 
 modules_install:
-	$(MAKE) -C $(KERNEL_SRC) M=$(shell pwd) modules_install
+	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules_install
 
 clean:
-	$(MAKE) -C $(KERNEL_SRC) M=$(PWD) clean
+	$(MAKE) -C $(KERNEL_SRC) M=$(M) clean

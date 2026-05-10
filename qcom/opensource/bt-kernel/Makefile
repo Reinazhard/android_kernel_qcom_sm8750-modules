@@ -1,8 +1,6 @@
 KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
-M ?= $(shell pwd)
-
-M=$(PWD)
-BT_ROOT=$(KERNEL_SRC)/$(M)
+M ?= $(PWD)
+BT_ROOT ?= $(KERNEL_SRC)/$(M)
 
 KBUILD_OPTIONS+=  BT_ROOT=$(BT_ROOT)
 KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS=$(M)/../audio-kernel/Module.symvers

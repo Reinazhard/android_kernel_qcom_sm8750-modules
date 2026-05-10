@@ -9,7 +9,7 @@ else
 CCFLAGS += -m32
 endif
 
-M ?= $(shell pwd)
+M ?= $(PWD)
 #obj-m := rmnet_core.o rmnet_ctl.o
 
 rmnet_core-y += 	rmnet_config.o \
@@ -37,7 +37,7 @@ endif
 
 KERNEL_SRC ?= /lib/modules/$(shell uname -r)/build
 
-KBUILD_OPTIONS := RMNET_CORE_ROOT=$(PWD)
+KBUILD_OPTIONS := RMNET_CORE_ROOT?=$(PWD)
 KBUILD_OPTIONS += MODNAME?=rmnet_core
 KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS=$(M)/../../datarmnet-ext/mem/Module.symvers
 KBUILD_OPTIONS += KBUILD_EXTRA_SYMBOLS+=$(M)/../../dataipa/drivers/platform/msm/Module.symvers
@@ -46,7 +46,8 @@ all:
 	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules $(KBUILD_OPTIONS)
 
 modules_install:
-	$(MAKE) -C $(KERNEL_SRC) M=$(M) modules_install
+	$(MAKE) INSTALL_MOD_STRIP=1 -C $(KERNEL_SRC) M=$(M) modules_install
 
 clean:
 	$(MAKE) -C $(KERNEL_SRC) M=$(M) clean
+

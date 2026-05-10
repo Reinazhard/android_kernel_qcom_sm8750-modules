@@ -1,5 +1,9 @@
 # SPDX-License-Identifier: GPL-2.0-only
 
+$(shell echo '#define CAMERA_COMPILE_TIME "$(shell date)"' > $(CAMERA_KERNEL_ROOT)/cam_generated_h)
+$(shell echo '#define CAMERA_COMPILE_BY "$(shell whoami)"' >> $(CAMERA_KERNEL_ROOT)/cam_generated_h)
+$(shell echo '#define CAMERA_COMPILE_HOST "$(shell uname -n)"' >> $(CAMERA_KERNEL_ROOT)/cam_generated_h)
+
 ifeq ($(CONFIG_QCOM_CAMERA_DEBUG), y)
 $(info "CAMERA_KERNEL_ROOT is: $(CAMERA_KERNEL_ROOT)")
 $(info "KERNEL_ROOT is: $(KERNEL_ROOT)")
